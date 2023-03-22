@@ -16,6 +16,7 @@ body {
     margin: 0 auto;
     max-width: 1000px;
     position: relative;
+    overflow: hidden;
 }
 
 .gallery-item {
@@ -80,7 +81,8 @@ body {
     display: flex;
     justify-content: space-between;
     margin: 25px 0;
-    height: 100px;
+    /* height: 100px; */
+    height: 15%;
     width: 55%;
     z-index: 3;
 }
@@ -239,7 +241,8 @@ body {
 
 .gallery-dots{
     position: absolute;
-    bottom: 80px;
+    /* bottom: 80px; */
+    bottom: 10%;
     z-index: 3;
 }
 
@@ -255,4 +258,29 @@ body {
 
 .active{
     background-color: white;
+}
+
+
+@media only screen and (max-width: 600px) {
+
+    .gallery-container {
+        max-height: 70vh;
+    }
+
+
+    .gallery-item{
+        opacity: .1;
+        width: 100%;
+        max-width: 400px;
+        height: 70%;
+    }
+
+    .gallery-item-3{
+        opacity: 1;
+    }
+
+
+    .gallery-controls{
+        width: 90%;
+    }
 }

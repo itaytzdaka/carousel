@@ -20,12 +20,15 @@ const galleryItems = document.querySelectorAll(".gallery-item");
 
 class Carousel {
 
-    constructor(container, item, controls, order = 0) {
+    constructor(container, item, controls, order = 0, timeout = 2000, autoDisplay) {
         this.carouselContainer = container;
         this.carouselControls = controls;
         this.carouselArray = [...item];
         this.carouselArrayChanged = [...item];
         this.order = order;
+        this.myInterval= null;
+        this.timeout = timeout;
+        this.autoDisplay = autoDisplay;
     }
 
 
@@ -100,6 +103,7 @@ class Carousel {
         //change current array order and update dot active
         this.updateActiveDot(this.order);
         this.setCurrentState(this.order);
+        this.resetInterval();
     }
 
     //add controls to html
@@ -167,6 +171,7 @@ class Carousel {
 
                 //change the current array order
                 this.setCurrentState(i);
+                this.resetInterval();
             });
         });
     }
@@ -186,18 +191,31 @@ class Carousel {
     
         });        
     }
+
+    interval(){
+        if(this.autoDisplay){
+            this.myInterval = setInterval(() => {
+                this.setOrder(this.order + 1);
+            }, this.timeout);
+        }
+    }
+
+    resetInterval(){
+        clearInterval(this.myInterval);
+        this.interval();
+    }
 }
 
 
 
-const exampleCarousel = new Carousel(galleryContainer, galleryItems, galleryControls);
+const exampleCarousel = new Carousel(galleryContainer, galleryItems, galleryControls, 0, 3000, true);
 
 exampleCarousel.updateGallery();
 exampleCarousel.setControls();
 exampleCarousel.useControls();
 exampleCarousel.setDots();
 exampleCarousel.useDots();
-
+exampleCarousel.interval();
 
 
 
