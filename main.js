@@ -170,8 +170,7 @@ class Carousel {
                 dot.classList.add("active");
 
                 //change the current array order
-                this.setCurrentState(i);
-                this.resetInterval();
+                this.setOrder(i);
             });
         });
     }
@@ -192,6 +191,7 @@ class Carousel {
         });        
     }
 
+    //set auto display timer if autoDisplay is true
     interval(){
         if(this.autoDisplay){
             this.myInterval = setInterval(() => {
@@ -200,6 +200,7 @@ class Carousel {
         }
     }
 
+    //reset interval to start timer again from zero
     resetInterval(){
         clearInterval(this.myInterval);
         this.interval();
@@ -207,7 +208,7 @@ class Carousel {
 }
 
 
-
+//new Carousel(galleryContainer, galleryItems, galleryControls, gallery-order, timeout-mls, auto-display);
 const exampleCarousel = new Carousel(galleryContainer, galleryItems, galleryControls, 0, 3000, true);
 
 exampleCarousel.updateGallery();
